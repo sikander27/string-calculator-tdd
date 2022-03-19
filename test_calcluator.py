@@ -22,6 +22,6 @@ def test_add():
 
     # For negative number it should throw an exception "negatives not allowed" with the number.
 
-    with pytest.raises(Exception, match = r'negatives not allowed [-1, -2]'):
+    with pytest.raises(Exception, match = r'negatives not allowed \[-1, -2\]'):
         add("2, -1, -2")
 
