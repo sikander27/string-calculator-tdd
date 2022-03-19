@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-def string_calculator(s):
+def add(s):
     print("String Calculator")
     if s == "":
         return 0
