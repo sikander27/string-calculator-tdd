@@ -12,6 +12,9 @@ def test_add():
     # test for multiple comma separated numbers
     assert add("1, 2, 3") == 6
 
+    # Allow the Add method to handle new lines between numbers (instead of commas).
+    assert add("1\n2,3") == 6
+    assert add("1,\n, 2") == 3
 
 
 
