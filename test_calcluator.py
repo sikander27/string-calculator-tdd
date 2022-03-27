@@ -38,3 +38,26 @@ def test_string_with_negative_number():
 def test_string_with_alphabets():
     # test string with no numbers only string. It should return 0
     assert add("a, b") == 0
+
+def test_number_with_underscore():
+
+    assert add("1_000, 2_000") == 3000
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
