@@ -2,7 +2,7 @@
 Test suit for string_calculator.py
 """
 import pytest
-from string_calculator import add
+from string_calculator import add, add_2
 
 def test_empty_string():
     # Basic test with empty string
@@ -43,6 +43,16 @@ def test_number_with_underscore():
 
     assert add("1_000, 2_000") == 3000
 
+def test_odd_even_index_scenario():
+
+    assert add_2("1,3,4,7,6") == 1
+    assert add_2("1,2") == -1
+    assert add_2("") == 0
+    assert add_2("2") == 2
+    assert add_2("1\n2,3") == 2
+    assert add_2("1,\n, 2") == -1
+    assert add_2('//[***][%]&\n1***2***3&5|1{}3') == -5
+    assert add_2("1_000, 2_000") == -1000
 
 
 
