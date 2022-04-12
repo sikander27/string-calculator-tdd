@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 # Display calculator, output > 5
-from dataclasses import replace
 import re
 
 def add(s):
@@ -55,3 +54,27 @@ def helper_filter(s):
     if negative_numbers: raise Exception('negatives not allowed {}'.format(negative_numbers))
 
     return numbers
+
+print("Select operation.")
+print("1.Add numbers")
+print("2.Subtrace odd even sum")
+
+while True:
+    # take input from the user
+    choice = input("Your option:")
+    # check if choice is one of the four options
+    if choice in (1, 2):
+        input_string = input("Enter the string: ")
+
+        if choice == 1:
+            print(add(input_string))
+
+        elif choice == 2:
+            print(add_2(input_string))
+
+        # Check if user want to continue with different input
+        next_calculation = input(" Press 1 to continue: ")
+        if next_calculation != 1:
+          break 
+    else:
+        print("Invalid Input, Please choose 1 or 2")
