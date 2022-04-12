@@ -14,7 +14,7 @@ def add(s):
     if helper_filter(s) == 0:
         return 0
     result = sum(helper_filter(s))
-    digit_count = len(list(map(int, str(result))))
+    digit_count = len(str(result))
     if digit_count > 6:
         return "######"
     
@@ -40,7 +40,7 @@ def add_2(s):
             odd_sum = odd_sum + numbers[i]
     
     result = even_sum-odd_sum
-    digit_count = len(list(map(int, str(abs(result)))))
+    digit_count = len(str(result))
     if digit_count > 6:
         return "######"
     
