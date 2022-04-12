@@ -11,8 +11,15 @@ def add(s):
        (int): sum of the numbers and 0 for empty string
     raises: negative not allowed exceptions
     """
+    if helper_filter(s) == 0:
+        return 0
+    result = sum(helper_filter(s))
+    digit_count = len(list(map(int, str(result))))
+    if digit_count > 6:
+        return "######"
+    
+    return result
 
-    return 0 if helper_filter(s) == 0 else sum(helper_filter(s)) 
 
 def add_2(s):
     """
@@ -32,7 +39,12 @@ def add_2(s):
         else:
             odd_sum = odd_sum + numbers[i]
     
-    return even_sum-odd_sum
+    result = even_sum-odd_sum
+    digit_count = len(list(map(int, str(abs(result)))))
+    if digit_count > 6:
+        return "######"
+    
+    return result
 
 def helper_filter(s):
     # Helper function to filter numbers

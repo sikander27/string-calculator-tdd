@@ -43,6 +43,12 @@ def test_number_with_underscore():
 
     assert add("1_000, 2_000") == 3000
 
+def test_output_with_max_len():
+    # Display can only show 6 digits on the screen, for more than 6 digits it should return #####
+    # assert add("1_000000, 2_000000") == 3000000
+    assert add("1_000000, 2_000000") == "######"
+    assert add_2("1_000000, 2_000000") == "######"
+
 def test_odd_even_index_scenario():
 
     assert add_2("1,3,4,7,6") == 1
