@@ -65,11 +65,13 @@ def calculator():
     # check if choice is one of the four options
     if choice in (1, 2):
         input_string = input("Enter the string: ")
+        try:
+            if choice == 1:
+                print(add(input_string))
 
-        if choice == 1:
-            print(add(input_string))
-
-        elif choice == 2:
-            print(add_2(input_string))
+            elif choice == 2:
+                print(add_2(input_string))
+        except:
+            print("Negative not allowed")
     else:
         print("Invalid Input, Please choose 1 or 2")

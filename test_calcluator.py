@@ -3,8 +3,7 @@ Test suit for string_calculator.py
 """
 import pytest
 import string_calculator
-from unittest.mock import patch
-
+from test_base import set_keyboard_input, get_display_output
 def test_empty_string():
     # Basic test with empty string
     assert string_calculator.add("") == 0
@@ -61,123 +60,108 @@ def test_odd_even_index_scenario():
     assert string_calculator.add_2('//[***][%]&\n1***2***3&5|1{}3') == -5
     assert string_calculator.add_2("1_000, 2_000") == -1000
 
-def test_terminal_calculator_output_for_add2(capsys):
+
+def test_terminal_calculator_output_for_add():
     # Test overflow of digits in terminal
-    input_values = [2, "1_000000, 2_000000"]
- 
-    def mock_input(s):
-        print(s, end='')
-        return input_values.pop(0)
-    string_calculator.input = mock_input
- 
+    set_keyboard_input([1, "1_000000, 2_000000"])
     string_calculator.calculator()
-   
-    out, _ = capsys.readouterr()
+    output = get_display_output()
  
-    assert out == "".join([
-        'Select operation.\n',
-        '1.Add numbers\n', 
-        '2.Subtrace odd even sum\n',
+    assert output == [
+        'Select operation.',
+        '1.Add numbers', 
+        '2.Subtrace odd even sum',
         'Your option:',
         'Enter the string: ',
-        '######\n'
-    ])
-
-    # Test even odd calculation
-    input_values2 = [2, "1,3,4,7,6"]
-
-    def mock_input(s):
-        print(s, end='')
-        return input_values2.pop(0)
-    string_calculator.input = mock_input
- 
-    string_calculator.calculator()
-   
-    out, _ = capsys.readouterr()
- 
-    assert out == "".join([
-        'Select operation.\n',
-        '1.Add numbers\n', 
-        '2.Subtrace odd even sum\n',
-        'Your option:',
-        'Enter the string: ',
-        '1\n'
-    ])
-
-
-def test_terminal_calculator_output_for_add(capsys):
-    # Test overflow of digits in terminal
-    input_values = [1, "1_000000, 2_000000"]
- 
-    def mock_input(s):
-        print(s, end='')
-        return input_values.pop(0)
-    string_calculator.input = mock_input
- 
-    string_calculator.calculator()
-   
-    out, _ = capsys.readouterr()
- 
-    assert out == "".join([
-        'Select operation.\n',
-        '1.Add numbers\n', 
-        '2.Subtrace odd even sum\n',
-        'Your option:',
-        'Enter the string: ',
-        '######\n'
-    ])
+        '######'
+    ]
 
     # Testing sum operations
-    input_values2 = [1, "//[***][%]&\n1***2***3&5|1{}3"]
-
-    def mock_input(s):
-        print(s, end='')
-        return input_values2.pop(0)
-    string_calculator.input = mock_input
- 
+    set_keyboard_input([1, "//[***][%]&\n1***2***3&5|1{}3"])
     string_calculator.calculator()
-   
-    out, _ = capsys.readouterr()
+    output = get_display_output()
  
-    assert out == "".join([
-        'Select operation.\n',
-        '1.Add numbers\n', 
-        '2.Subtrace odd even sum\n',
+    assert output == [
+        'Select operation.',
+        '1.Add numbers', 
+        '2.Subtrace odd even sum',
         'Your option:',
         'Enter the string: ',
-        '15\n'
-    ])
+        15
+    ]
  
-def test_for_invalid_input_terminal(capsys):
-    # Test for invalid input
-    input_values = [4, "1_000000, 2_000000"]
  
-    def mock_input(s):
-        print(s, end='')
-        return input_values.pop(0)
-    string_calculator.input = mock_input
- 
+def test_terminal_calculator_output_for_add2():
+    # Test overflow of digits in terminal
+    set_keyboard_input([2, "1_000000, 2_000000"])
     string_calculator.calculator()
-   
-    out, _ = capsys.readouterr()
+    output = get_display_output()
  
-    assert out == "".join([
-        'Select operation.\n',
-        '1.Add numbers\n', 
-        '2.Subtrace odd even sum\n',
+    assert output == [
+        'Select operation.',
+        '1.Add numbers', 
+        '2.Subtrace odd even sum',
         'Your option:',
-        'Invalid Input, Please choose 1 or 2\n',
-    ])
+        'Enter the string: ',
+        '######'
+    ]
+    # Test even odd calculation
+    set_keyboard_input([2, "1,3,4,7,6"])
+    string_calculator.calculator()
+    output = get_display_output()
+ 
+    assert output == [
+        'Select operation.',
+        '1.Add numbers', 
+        '2.Subtrace odd even sum',
+        'Your option:',
+        'Enter the string: ',
+        1
+    ]
+    # Test even odd calculation for negative output
+    set_keyboard_input([2, "1,2"])
+    string_calculator.calculator()
+    output = get_display_output()
+ 
+    assert output == [
+        'Select operation.',
+        '1.Add numbers', 
+        '2.Subtrace odd even sum',
+        'Your option:',
+        'Enter the string: ',
+        -1
+    ]
 
 
+def test_for_invalid_input_terminal():
+    # Test for invalid input
+    set_keyboard_input([4, "1_000000, 2_000000"])
+    string_calculator.calculator()
+    output = get_display_output()
+ 
+    # print(output)
+    assert output == [
+        'Select operation.',
+        '1.Add numbers', 
+        '2.Subtrace odd even sum',
+        'Your option:',
+        'Invalid Input, Please choose 1 or 2',
+    ]
 
 
-
-
-
-
-
-
-
-
+def test_for_exceptions_terminal():
+    # Test for exceptions
+    set_keyboard_input([1, "1_000000, -2_000000"])
+    string_calculator.calculator()
+    output = get_display_output()
+ 
+    # print(output)
+    assert output == [
+        'Select operation.',
+        '1.Add numbers', 
+        '2.Subtrace odd even sum',
+        'Your option:',
+        'Enter the string: ',
+        'Negative not allowed',
+    ]
 
