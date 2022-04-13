@@ -55,11 +55,11 @@ def helper_filter(s):
 
     return numbers
 
-print("Select operation.")
-print("1.Add numbers")
-print("2.Subtrace odd even sum")
+def calculator():
 
-while True:
+    print("Select operation.")
+    print("1.Add numbers")
+    print("2.Subtrace odd even sum")
     # take input from the user
     choice = input("Your option:")
     # check if choice is one of the four options
@@ -71,10 +71,5 @@ while True:
 
         elif choice == 2:
             print(add_2(input_string))
-
-        # Check if user want to continue with different input
-        next_calculation = input(" Press 1 to continue: ")
-        if next_calculation != 1:
-          break 
     else:
         print("Invalid Input, Please choose 1 or 2")
